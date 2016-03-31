@@ -13,8 +13,8 @@ class AricleList extends Component {
     }
 
     getList() {
-        return this.props.articles.map((article, index) =>
-            <li key={article.id}><Article article = {article} /></li>
+        return this.props.articles.map((article) =>
+            <li key={article.id}><Article article = {article} comments = {article.comments} /></li>
         )
     }
 }

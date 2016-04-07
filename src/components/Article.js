@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import { findDOMNode } from 'react-dom'
+import { commentStore } from '../stores'
 
 class Article extends Component {
 
     render() {
-        const { article: { title }, isSelected, openItem, deleteArticle } = this.props
+        const { article: { title }, isSelected, openItem } = this.props
         const style = isSelected ? {color: 'red'} : null
         return (
             <div ref = "articleContainer">
@@ -34,13 +35,22 @@ class Article extends Component {
         selectArticle(id)
     }
 
+    onCommentAdded = (ev) => {
+      console.log('onCommentAdded', ev)
+      commentStore.__addComment({ articleId: this.props.article.id, comment: { name: 'auto', text: ev } })
+    }
+
     getBody() {
         if (!this.props.isOpen) return null
         const { article } = this.props
         return (
             <section>
                 {article.text}
-                <CommentList comments = {article.getRelation('comments')} ref = "commentList" />
+                <CommentList
+                  comments = {article.getRelation('comments')}
+                  ref = "commentList"
+                  addHandler = {this.onCommentAdded}
+                />
             </section>
         )
     }

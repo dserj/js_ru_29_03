@@ -22,8 +22,9 @@ class CommentStore extends SimpleStore {
     if (!comment.text) { throw new Error('text was not defined!') }
     if (!comment.name) { throw new Error('name was not defined!') }
 
+    //не обязательно такой id будет уникальным
     let id = this.getAll().slice(-1)[0].id
-
+    
     comment.id = ++id
     this.__add(comment)
 

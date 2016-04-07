@@ -45,6 +45,7 @@ class Article extends Component {
 
     onCommentAdded = (ev) => {
       console.log('onCommentAdded', ev)
+      //нет, нельзя менять сторы напрямую из view. Только вызывать AC. а в сторах уже реагировать на экшин
       commentStore.__addComment({ articleId: this.props.article.id, comment: { name: 'auto', text: ev } })
     }
 

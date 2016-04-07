@@ -5,6 +5,14 @@ import { commentStore } from '../stores'
 
 class Article extends Component {
 
+    static propTypes = {
+      deleteArticle: PropTypes.func.isRequired,
+      selectArticle: PropTypes.func.isRequired,
+      article: PropTypes.object.isRequired,
+      isSelected: PropTypes.bool.isRequired,
+      openItem: PropTypes.func.isRequired
+    }
+
     render() {
         const { article: { title }, isSelected, openItem } = this.props
         const style = isSelected ? {color: 'red'} : null

@@ -1,20 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import { findDOMNode } from 'react-dom'
-import { commentStore } from '../stores'
 
 class Article extends Component {
-
     static propTypes = {
-      deleteArticle: PropTypes.func.isRequired,
-      selectArticle: PropTypes.func.isRequired,
-      article: PropTypes.object.isRequired,
-      isSelected: PropTypes.bool.isRequired,
-      openItem: PropTypes.func.isRequired
+        article: PropTypes.object.isRequired,
+        selectArticle: PropTypes.func.isRequired,
+        isSelected: PropTypes.bool,
+        openItem: PropTypes.func.isRequired,
+        deleteArticle: PropTypes.func.isRequired
     }
-
     render() {
-        const { article: { title }, isSelected, openItem } = this.props
+        const { article: { title }, isSelected, openItem, deleteArticle } = this.props
         const style = isSelected ? {color: 'red'} : null
         return (
             <div ref = "articleContainer">
@@ -43,23 +40,13 @@ class Article extends Component {
         selectArticle(id)
     }
 
-    onCommentAdded = (ev) => {
-      console.log('onCommentAdded', ev)
-      //нет, нельзя менять сторы напрямую из view. Только вызывать AC. а в сторах уже реагировать на экшин
-      commentStore.__addComment({ articleId: this.props.article.id, comment: { name: 'auto', text: ev } })
-    }
-
     getBody() {
         if (!this.props.isOpen) return null
         const { article } = this.props
         return (
             <section>
                 {article.text}
-                <CommentList
-                  comments = {article.getRelation('comments')}
-                  ref = "commentList"
-                  addHandler = {this.onCommentAdded}
-                />
+                <CommentList article = {article} ref = "commentList" />
             </section>
         )
     }

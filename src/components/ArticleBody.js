@@ -12,6 +12,7 @@ class ArticleBody extends Component {
   componentWillReceiveProps(nextProps)
   {
     // console.log('ArticleBody will receive props', nextProps, this.props);
+    //тут хорошо б еще проверку на && !this.props.isOpen что б не сделать лишних запросов если лоадинг не мгновенный
     if (nextProps.isOpen === true && nextProps.article.text == undefined)
     {
       console.log('loading article: ' + this.props.article.id)

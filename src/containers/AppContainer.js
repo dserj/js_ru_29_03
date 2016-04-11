@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { articleStore } from '../stores'
 import ArticleList from './../components/ArticleList'
 import { deleteArticle, loadAllArticles } from '../AC/articles'
 import connectToStore from '../HOC/connectToStore'
@@ -16,7 +15,7 @@ class AppContainer extends Component {
     render() {
         const { articles, loading } = this.props
         if (loading) return <h1>Loading...</h1>
-        return <ArticleList articles = {articles} deleteArticle = {deleteArticle}/>
+        return <ArticleList articles = {articles} deleteArticle = {deleteArticle} />
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import CommentList from './CommentList'
+import ArticleBody from './ArticleBody'
 import { findDOMNode } from 'react-dom'
 
 class Article extends Component {
@@ -8,6 +8,7 @@ class Article extends Component {
         selectArticle: PropTypes.func.isRequired,
         isSelected: PropTypes.bool,
         openItem: PropTypes.func.isRequired,
+        isOpen: PropTypes.bool.isRequired,
         deleteArticle: PropTypes.func.isRequired
     }
     render() {
@@ -18,7 +19,7 @@ class Article extends Component {
                 <h3 onClick = {openItem} style = {style}>{title}</h3>
                 <a href = "#" onClick = {this.handleSelect}>select this article</a> |
                 <a href = "#" onClick = {this.deleteArticle}>delete this article</a>
-                {this.getBody()}
+                <ArticleBody article = {this.props.article} isOpen = {this.props.isOpen} />
             </div>
         )
     }
@@ -28,27 +29,9 @@ class Article extends Component {
         this.props.deleteArticle(this.props.article.id)
     }
 
-    componentDidMount() {
-/*
-        console.log('---', this.refs);
-        console.log('---', 'commentList: ', this.refs.commentList, findDOMNode(this.refs.commentList));
-*/
-    }
-
     handleSelect = (ev) => {
         const { article: {id}, selectArticle } = this.props
         selectArticle(id)
-    }
-
-    getBody() {
-        if (!this.props.isOpen) return null
-        const { article } = this.props
-        return (
-            <section>
-                {article.text}
-                <CommentList article = {article} ref = "commentList" />
-            </section>
-        )
     }
 }
 

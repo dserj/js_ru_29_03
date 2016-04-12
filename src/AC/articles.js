@@ -16,11 +16,9 @@ export const loadAllArticles = asyncAC(loadAll, LOAD_ALL_ARTICLES)
 export const loadSingleArticle = function(id) {
     console.log('article AC, start loading')
 
-    setTimeout(() => {
-        AppDispatcher.dispatch({
-            type: LOAD_ARTICLE + START
-        })
-    }, 1)
+    AppDispatcher.dispatch({
+        type: LOAD_ARTICLE + START
+    })
 
     setTimeout(function() {
         loadArticle(id)

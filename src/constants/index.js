@@ -6,6 +6,7 @@ export const START = '_START'
 export const SUCCESS = '_SUCCESS'
 export const FAIL = '_FAIL'
 export const LOADING = 'LOADING'
+export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 
 
 export const ADD_COMMENT = 'ADD_COMMENT'

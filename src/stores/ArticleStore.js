@@ -23,7 +23,7 @@ class ArticleStore extends SimpleStore {
                     break;
 
                 case LOAD_COMMENTS_FOR_ARTICLE + SUCCESS:
-                    console.log(data, response)
+                    //console.log(data, response)
 
                     article = this.getById(data.id)
                     article.commentsLoading = false;

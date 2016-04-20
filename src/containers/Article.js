@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import connectToStore from '../HOC/connectToStore'
-import { Link } from 'react-router'
 import { loadArticleById, deleteArticle } from '../AC/articles'
 import Article from '../components/Article'
 
@@ -14,12 +13,14 @@ class ArticleContainer extends Component {
         const { article } = this.props
         if (!article || article.loading) return <h3>Loading...</h3>
 
-        return <Article
-            article = {article}
-            ignoreLoading = {true}
-            deleteArticle = {deleteArticle}
-            isOpen = {true}
-        />
+        return <div>
+            <Article
+              article = {article}
+              ignoreLoading = {true}
+              deleteArticle = {deleteArticle}
+              isOpen = {true}
+            />
+        </div>
     }
 }
 

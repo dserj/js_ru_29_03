@@ -9,14 +9,16 @@ import CommentsRoot from './RouteHandlers/CommentsRoot'
 import CommentsPage from './RouteHandlers/CommentsPage'
 import ArticlesIndex from './RouteHandlers/ArticlesIndex'
 import NotFound from './RouteHandlers/NotFound'
+import Forbidden from './RouteHandlers/Forbidden'
 import { commentStore } from './stores'
 
 
 export default (
     <Router history = {history} >
         <Redirect from = "/" to = "/articles" />
+        <Route path = "/403" component = {Forbidden} />
         <Route path="/" component = {IndexPage} >
-            <Route path = "articles/new" component = {NewArticlePage} />
+            <Route path = "articles/new" component = {NewArticlePage} onEnter = {checkAccess} />
             <Route path = "articles" component = {Articles} >
                 <IndexRoute component = {ArticlesIndex} />
                 <Route path = "/new" component = {NewArticlePage} />
@@ -33,6 +35,11 @@ export default (
         <Route path = "*" component = {NotFound} />
     </Router>
 )
+
+function checkAccess(routeData, replace)
+{
+  console.log('check access', routeData, this.context)
+}
 
 function checkPage(routeData, replace) {
     if (!commentStore.total) return

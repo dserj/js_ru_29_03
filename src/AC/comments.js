@@ -3,11 +3,11 @@ import AppDispatcher from '../dispatcher'
 import { asyncAC } from './utils'
 import { loadForPage, loadForArticle } from './api/comments'
 
-export function addComment(text, articleId) {
+export function addComment(text, articleId, user) {
     AppDispatcher.dispatch({
         type: ADD_COMMENT,
         data: {
-            text, articleId,
+            text, articleId, user,
             id: Date.now()
         }
     })

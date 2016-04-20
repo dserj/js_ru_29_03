@@ -8,6 +8,10 @@ class CommentList extends Component {
         commentText: ''
     }
 
+    static contextTypes = {
+        currentUser: PropTypes.object
+    }
+
     render() {
         return (
             <div>
@@ -45,7 +49,7 @@ class CommentList extends Component {
             return <div>Loading comments...</div>
         }
 
-        console.log(comments)
+        //console.log(comments)
 
         const commetItems = comments.map(comment => <li key={comment.id}><Comment comment = {comment}/></li>)
         return <ul>
@@ -63,7 +67,7 @@ class CommentList extends Component {
 
     addComment = (ev) => {
         ev.preventDefault()
-        addNewComment(this.state.commentText, this.props.article.id)
+        addNewComment(this.state.commentText, this.props.article.id, this.context.currentUser.name)
         this.setState({
             commentText: ''
         })

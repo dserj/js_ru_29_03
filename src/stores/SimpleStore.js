@@ -6,7 +6,17 @@ class SimpleStore extends EventEmitter {
         super()
         this.__stores = stores
         this.__items = {}
-        if (initialData) initialData.forEach(this.__add)
+        if (initialData)
+        {
+            if (initialData.isArray)
+            {
+                initialData.forEach(this.__add)
+            }
+            else
+            {
+                this.__add(initialData)
+            }
+        }
     }
 
     emitChange() {
@@ -43,6 +53,10 @@ class SimpleStore extends EventEmitter {
 
     __delete = (id) => {
         delete this.__items[id]
+    }
+
+    __clear = () => {
+        this.__items = {}
     }
 
     __update = (item) => {

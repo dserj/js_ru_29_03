@@ -1,7 +1,7 @@
 import AppDispatcher from '../dispatcher'
 import SimpleStore from './SimpleStore'
 import { loadAllArticles } from '../AC/articles'
-import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE_BY_ID, START, SUCCESS, FAIL } from '../constants'
+import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE_BY_ID, LOAD_COMMENTS_FOR_ARTICLE, START, SUCCESS, FAIL } from '../constants'
 
 class ArticleStore extends SimpleStore {
     constructor(...args) {
@@ -16,10 +16,26 @@ class ArticleStore extends SimpleStore {
                     this.__delete(data.id)
                     break
 
+                case LOAD_COMMENTS_FOR_ARTICLE + START:
+                    article = this.getById(data.id)
+                    article.commentsLoading = true;
+                    this.__update(article)
+                    break;
+
+                case LOAD_COMMENTS_FOR_ARTICLE + SUCCESS:
+                    console.log(data, response)
+
+                    article = this.getById(data.id)
+                    article.commentsLoading = false;
+                    article.commentsLoaded = true;
+                    article.comments = response
+                    this.__update(article)
+                    break;
+
                 case ADD_COMMENT:
-                    AppDispatcher.waitFor([this.getStore('comment').dispatchToken])
+                    AppDispatcher.waitFor([this.getStore('comments').dispatchToken])
                     article = this.getById(data.articleId)
-                    article.comments = (article.comments || []).concat(data.id)
+                    article.comments = (article.comments || []).concat(data)
                     break
 
                 case LOAD_ALL_ARTICLES + START:

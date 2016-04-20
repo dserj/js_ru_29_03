@@ -14,6 +14,7 @@ class CommentStore extends SimpleStore {
             switch (type) {
                 case ADD_COMMENT:
                     this.__add({
+                        article: data.articleId,
                         text: data.text,
                         id: data.id
                     })

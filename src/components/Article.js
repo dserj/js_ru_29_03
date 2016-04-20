@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 
 class Article extends Component {
     static propTypes = {
-        article: PropTypes.object.isRequired
+        article: PropTypes.object.isRequired,
+        deleteArticle: PropTypes.func.isRequired
     }
 
     render() {
@@ -19,7 +20,7 @@ class Article extends Component {
     deleteArticle = (ev) => {
         ev.preventDefault()
         console.log('article ## delete article, id = ', this.props.article.id)
-        //this.props.deleteArticle(this.props.article.id)
+        this.props.deleteArticle(this.props.article.id)
     }
 
     getBody() {

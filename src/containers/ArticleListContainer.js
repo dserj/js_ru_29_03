@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { increment as pureInrement } from '../AC/counter'
+import { deleteArticle as pureDeleteArticle } from '../AC/article'
 import ArticleList from '../components/ArticleList'
 
 class ArticleListContainer extends Component {
   static propTypes = {
-    articles: PropTypes.array.isRequired
+    articles: PropTypes.array.isRequired,
+    deleteArticle: PropTypes.func.isRequired
   };
 
   render() {
@@ -14,14 +15,9 @@ class ArticleListContainer extends Component {
     return (
       <div>
         <h1>Number of articles {articles.length}</h1>
-        <ArticleList articles = {articles} />
+        <ArticleList articles = {articles} deleteArticle = {this.props.deleteArticle} />
       </div>
     )
-  }
-
-  handleClick = (ev) => {
-    ev.preventDefault()
-    this.props.increment()
   }
 }
 
@@ -29,5 +25,5 @@ export default connect((state) => {
   const { articles } = state
   return {articles: articles}
 }, {
-  increment: pureInrement
+  deleteArticle: pureDeleteArticle
 })(ArticleListContainer)

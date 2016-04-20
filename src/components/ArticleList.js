@@ -5,7 +5,8 @@ import singleOpen from '../HOC/singleOpen'
 class AricleList extends Component {
 
     static propTypes = {
-        articles: PropTypes.array.isRequired
+        articles: PropTypes.array.isRequired,
+        deleteArticle: PropTypes.func.isRequired
     }
 
     render() {
@@ -23,6 +24,7 @@ class AricleList extends Component {
             <li key={article.id}>
                 <Article
                     article = {article}
+                    deleteArticle = {this.props.deleteArticle}
                 />
             </li>
         )

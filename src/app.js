@@ -1,7 +1,23 @@
 import React from 'react'
 import { render } from 'react-dom'
-//import AppContainer from './containers/AppContainer'
-//import { articles } from './fixtures'
-import routes from './routes'
+import Root from './containers/Root'
+import store from './store'
+import { increment } from './AC/counter'
 
-render(routes, document.getElementById('container'))
+window.store = store
+
+render(<Root store = {store} />, document.getElementById('container'))
+
+/*
+function wrappedIncrement() {
+    store.dispatch(increment())
+}
+
+function renderCounter() {
+    render(<Counter count = {store.getState().counter} increment = {wrappedIncrement} />, document.getElementById('container'))
+}
+
+renderCounter()
+
+store.subscribe(renderCounter)
+*/
